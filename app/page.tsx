@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ImageUploader } from "@/components/ui/image-uploader";
+import { ShowMoreOptions } from "@/components/ShowMoreOptions";
 import { useState } from "react";
 
 export default function Home() {
@@ -11,6 +12,9 @@ export default function Home() {
   const [name, setName] = useState("TestCoin");
   const [ticker, setTicker] = useState("TEST");
   const [image, setImage] = useState<string | null>(null);
+  const [xLink, setXLink] = useState("https://x.com/SuiNetwork");
+  const [discordLink, setDiscordLink] = useState("https://x.com/SuiNetwork");
+  const [telegramLink, setTelegramLink] = useState("https://x.com/SuiNetwork");
 
   const Content = () => {
     return (
@@ -55,6 +59,29 @@ export default function Home() {
           <Label htmlFor="image">Image</Label>
           <ImageUploader onImageChange={setImage} />
         </div>
+
+        {/* line */}
+        <div className="w-full h-[1px] bg-[#D9D9D9] "></div>
+
+        {/* Show more options component */}
+        <ShowMoreOptions
+          xLink={xLink}
+          discordLink={discordLink}
+          telegramLink={telegramLink}
+          onXLinkChange={setXLink}
+          onDiscordLinkChange={setDiscordLink}
+          onTelegramLinkChange={setTelegramLink}
+        />
+
+        {/* Launch button */}
+        <button className="w-full bg-[#0066FF] text-white py-4 rounded-lg mt-4 font-medium min-h-[63px]">
+          Launch!
+        </button>
+
+        {/* Bonding curve message */}
+        <p className="text-gray-500 ">
+          When your coin completes its bonding curve you receive 0.5 SUI
+        </p>
       </div>
     );
   };

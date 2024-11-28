@@ -57,8 +57,8 @@ const config: Config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
 		  screens: {
-			sm: { min: "378px", max: "574px" },
-			md: { min: "575px", max: "915px" },
+			sm: { min: "280px", max: "375px" },
+			md: { min: "375px", max: "915px" },
 			lg: { min: "916px", max: "1199px" },
 			xl: { min: "1200px", max: "4000px" },
 			gmd: { min: "991px" },

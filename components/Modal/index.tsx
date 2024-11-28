@@ -46,7 +46,7 @@ const Modal = ({
   };
 
   const modalContent = (
-    <div className="fixed inset-0 max-w- flex items-center justify-center z-[99]">
+    <div className="fixed inset-0 flex items-center justify-center z-[99]">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black bg-opacity-50"
@@ -55,28 +55,32 @@ const Modal = ({
       ></div>
 
       {/* Modal */}
-      <div className="inset-0 flex items-center justify-center w-screen z-[99] relative">
+      <div className="inset-0 flex items-center justify-center w-screen z-[99] relative p-4">
         <div
           className={cn(
-            "relative rounded-2xl w-full p-5 mx-auto bg-white shadow-[0px_6px_12px_0px_#00000005]",
-            "sm:min-h-[270px] md:min-h-[270px]",
-
+            "relative rounded-2xl w-full bg-white shadow-[0px_6px_12px_0px_#00000005]",
+            "flex flex-col max-h-[90vh]",
             sizeClasses[size],
-            "min-w-[768px] sm:min-w-[300px] md:min-w-[300px] ",
+            "min-w-[768px] sm:min-w-[300px] md:min-w-[300px]",
             className
           )}
         >
-          <div>
+          <div className="flex justify-between items-center px-5 pt-5">
+            <h2
+              className={clsx(
+                "font-semibold text-[#081531] text-2xl sm:text-xl md:text-xl leading-[22.8px] tracking-[-0.01em]",
+                "truncate max-w-[90%]",
+                titleClassName
+              )}
+            >
+              {title}
+            </h2>
             <span>
               {closeable && (
                 <div className="flex justify-end">
                   <button
                     onClick={onClose}
-                    className={clsx(
-                      "absolute top-4 right-4 text-black hover:text-gray-700 transition-colors duration-200",
-                      "sm:relative sm:top-0 sm:right-0 md:relative md:top-0 md:right-0",
-                      "text-[#006AFF]"
-                    )}
+                    className={clsx(" duration-200", "text-[#006AFF]")}
                     aria-label="Close modal"
                   >
                     <svg
@@ -97,29 +101,20 @@ const Modal = ({
                 </div>
               )}
             </span>
-
-            <h2
-              className={clsx(
-                "font-semibold text-[#081531] text-2xl sm:text-xl md:text-xl leading-[22.8px] tracking-[-0.01em]",
-                titleClassName
-              )}
-            >
-              {title}
-            </h2>
           </div>
 
-          <div className="flex items-center justify-center min-h-[180px] sm:min-h-[80px] md:min-h-[80px]">
+          <div className="flex-1 px-5 overflow-y-auto !pb-5">
             {children}
           </div>
 
           {footer && (
-            <div className="flex justify-center items-center mt-4 w-full">
+            <div className="flex justify-center items-center mt-4 w-full px-5 py-3">
               {footer}
             </div>
           )}
 
           {bottomSection && (
-            <div className="absolute flex justify-center w-full mt-10">
+            <div className="w-full px-5 py-3 mt-auto">
               {bottomSection}
             </div>
           )}

@@ -51,7 +51,7 @@ export const ShowMoreOptions = memo(function ShowMoreOptions({
       </button>
 
       {showMoreOptions && (
-        <div className="flex gap-4">
+        <div className="flex gap-4 sm:flex-col md:flex-col">
           <SocialLinkInput
             id="xLink"
             label="X link"

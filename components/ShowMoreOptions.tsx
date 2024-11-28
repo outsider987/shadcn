@@ -1,29 +1,34 @@
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
+import { SocialLinkInput } from "./SocialLinkInput";
 
-interface ShowMoreOptionsProps {
+interface SocialLinks {
   xLink: string;
   discordLink: string;
   telegramLink: string;
-  onXLinkChange: (value: string) => void;
-  onDiscordLinkChange: (value: string) => void;
-  onTelegramLinkChange: (value: string) => void;
 }
 
-export function ShowMoreOptions({
-  xLink,
-  discordLink,
-  telegramLink,
-  onXLinkChange,
-  onDiscordLinkChange,
-  onTelegramLinkChange,
+interface ShowMoreOptionsProps {
+  socialLinks: SocialLinks;
+  onSocialLinksChange: (key: string, value: string) => void;
+}
+
+export const ShowMoreOptions = memo(function ShowMoreOptions({
+  socialLinks,
+  onSocialLinksChange,
 }: ShowMoreOptionsProps) {
   const [showMoreOptions, setShowMoreOptions] = useState(false);
+
+  const handleSocialLinkChange = useCallback(
+    (key: keyof SocialLinks) => (value: string) => {
+      onSocialLinksChange(key, value);
+    },
+    [onSocialLinksChange]
+  );
 
   return (
     <>
       <button
+        type="button"
         onClick={() => setShowMoreOptions(!showMoreOptions)}
         className="flex items-center text-[#0066FF] justify-between font-medium"
       >
@@ -46,38 +51,27 @@ export function ShowMoreOptions({
       </button>
 
       {showMoreOptions && (
-        <div className="flex  gap-4">
-          <div className="grid w-full items-center gap-2">
-            <Label htmlFor="xLink">X link</Label>
-            <Input
-              id="xLink"
-              placeholder="Enter X link"
-              value={xLink}
-              onChange={(e) => onXLinkChange(e.target.value)}
-            />
-          </div>
-
-          <div className="grid w-full items-center gap-2">
-            <Label htmlFor="discord">Discord</Label>
-            <Input
-              id="discord"
-              placeholder="Enter Discord link"
-              value={discordLink}
-              onChange={(e) => onDiscordLinkChange(e.target.value)}
-            />
-          </div>
-
-          <div className="grid w-full items-center gap-2">
-            <Label htmlFor="telegram">Telegram link</Label>
-            <Input
-              id="telegram"
-              placeholder="Enter Telegram link"
-              value={telegramLink}
-              onChange={(e) => onTelegramLinkChange(e.target.value)}
-            />
-          </div>
+        <div className="flex gap-4">
+          <SocialLinkInput
+            id="xLink"
+            label="X link"
+            value={socialLinks.xLink}
+            onChange={handleSocialLinkChange("xLink")}
+          />
+          <SocialLinkInput
+            id="discord"
+            label="Discord"
+            value={socialLinks.discordLink}
+            onChange={handleSocialLinkChange("discordLink")}
+          />
+          <SocialLinkInput
+            id="telegram"
+            label="Telegram link"
+            value={socialLinks.telegramLink}
+            onChange={handleSocialLinkChange("telegramLink")}
+          />
         </div>
       )}
     </>
   );
-} 
+});

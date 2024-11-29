@@ -93,15 +93,15 @@ export const Content = ({ onSubmit }: ContentProps) => {
       onSubmit={formSubmitHandler}
       className="pt-4 w-full flex flex-col gap-4"
     >
-      <div className="flex gap-2 sm:flex-col md:flex-col">
-        <div className="grid w-full max-w-sm items-center gap-2 ">
+      <div className="flex gap-2 sm:flex-col md:flex-col w-full">
+        <div className="grid w-full  items-center gap-2 ">
           <Label htmlFor="name">Name</Label>
           <Input id="name" placeholder="Coin name" {...nameRegister} />
           {errors.name && (
             <span className="text-red-500 text-sm">{errors.name.message}</span>
           )}
         </div>
-        <div className="grid w-full max-w-sm items-center gap-2">
+        <div className="grid w-full  items-center gap-2 ">
           <Label htmlFor="ticker">Ticker</Label>
           <Input id="ticker" placeholder="Ticker" {...tickerRegister} />
           {errors.ticker && (

@@ -12,7 +12,6 @@ interface ImageUploaderProps {
 
 export function ImageUploader({ onImageChange }: ImageUploaderProps) {
   const [preview, setPreview] = useState<string | null>(null);
-  const [file, setFile] = useState<File | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const objectUrlRef = useRef<string | null>(null);
 
@@ -34,7 +33,6 @@ export function ImageUploader({ onImageChange }: ImageUploaderProps) {
       const imageUrl = URL.createObjectURL(selectedFile);
       setPreview(imageUrl);
       objectUrlRef.current = imageUrl;
-      setFile(selectedFile);
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result as string;
@@ -51,7 +49,6 @@ export function ImageUploader({ onImageChange }: ImageUploaderProps) {
       objectUrlRef.current = null;
     }
     setPreview(null);
-    setFile(null);
     onImageChange?.(null);
     if (inputRef.current) {
       inputRef.current.value = "";
@@ -65,9 +62,11 @@ export function ImageUploader({ onImageChange }: ImageUploaderProps) {
           onClick={() => inputRef.current?.click()}
           className="cursor-pointer"
         >
-          <img
+          <Image
             src={uploadIcon.src}
             alt="Upload"
+            width={100}
+            height={100}
             className="w-[100px] h-[100px]"
           />
         </div>

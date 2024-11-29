@@ -36,13 +36,13 @@ const Modal = ({
 
   const sizeClasses = {
     xs: "max-w-xs",
-    sm: "max-w-sm",
+    sm: "!max-w-[400px]",
     md: "max-w-md",
     lg: "max-w-lg",
     xl: "max-w-xl sm:!max-w-[300px] md:!max-w-[300px]",
-    "2xl": "max-w-2xl sm:!max-w-[300px] md:!max-w-[300px] duration-300",
-    "3xl": "max-w-3xl sm:!max-w-[300px] md:!max-w-[300px] duration-300",
-    "4xl": "max-w-4xl sm:!max-w-[300px] md:!max-w-[300px] duration-300",
+    "2xl": "min-w-[768px] max-w-2xl sm:!max-w-[300px] md:!max-w-[700px] duration-300",
+    "3xl": "min-w-[768px] max-w-3xl sm:!max-w-[300px] md:!max-w-[700px] duration-300",
+    "4xl": "max-w-4xl sm:!max-w-[300px] md:!max-w-[700px] duration-300",
   };
 
   const modalContent = (
@@ -61,14 +61,15 @@ const Modal = ({
             "relative rounded-2xl w-full bg-white shadow-[0px_6px_12px_0px_#00000005]",
             "flex flex-col max-h-[90vh]",
             sizeClasses[size],
-            "min-w-[768px] sm:min-w-[300px] md:min-w-[300px]",
+            " sm:min-w-[300px] md:min-w-[300px]",
+            "min-h-[323px]",
             className
           )}
         >
           <div className="flex justify-between items-center px-5 pt-5">
             <h2
               className={clsx(
-                "font-semibold text-[#081531] text-2xl sm:text-xl md:text-xl leading-[22.8px] tracking-[-0.01em]",
+                "font-semibold text-[#081531] text-2xl sm:text-xl md:text-xl  tracking-[-0.01em]",
                 "truncate max-w-[90%]",
                 titleClassName
               )}
@@ -103,9 +104,7 @@ const Modal = ({
             </span>
           </div>
 
-          <div className="flex-1 px-5 overflow-y-auto !pb-5">
-            {children}
-          </div>
+          <div className="flex-1 px-5 overflow-y-auto !pb-5">{children}</div>
 
           {footer && (
             <div className="flex justify-center items-center mt-4 w-full px-5 py-3">
@@ -114,9 +113,7 @@ const Modal = ({
           )}
 
           {bottomSection && (
-            <div className="w-full px-5 py-3 mt-auto">
-              {bottomSection}
-            </div>
+            <div className="w-full px-5 py-3 mt-auto">{bottomSection}</div>
           )}
         </div>
       </div>

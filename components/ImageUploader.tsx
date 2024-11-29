@@ -35,11 +35,15 @@ export function ImageUploader({ onImageChange }: ImageUploaderProps) {
       setPreview(imageUrl);
       objectUrlRef.current = imageUrl;
       setFile(selectedFile);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        onImageChange?.(base64String);
+      };
+      reader.readAsDataURL(selectedFile);
       console.log("uploaded imageUrl", imageUrl);
     }
   };
-
-
 
   const handleCancel = () => {
     if (objectUrlRef.current) {

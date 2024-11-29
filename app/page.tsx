@@ -3,18 +3,20 @@ import Modal from "@/components/Modal";
 import { Button } from "@/components/ui/button";
 import { Content } from "@/components/Content";
 import { useState } from "react";
+import { BuyContent } from "@/components/BuyContent";
 
 export default function Home() {
   const [show, setShow] = useState(false);
+  const [buyShow, setBuyShow] = useState(false);
 
   const handleSubmit = async (data: any) => {
     try {
-      console.log('Form submitted:', data);
-      // Here you would typically send the data to your backend
-      // await submitToBackend(data);
+      console.log("Form submitted:", data);
+
       setShow(false);
+      setBuyShow(true);
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -25,6 +27,14 @@ export default function Home() {
       </main>
       <Modal show={show} onClose={() => setShow(false)} title="Launch coin">
         <Content onSubmit={handleSubmit} />
+      </Modal>
+      <Modal
+        size="sm"
+        show={buyShow}
+        onClose={() => setBuyShow(false)}
+        title="How many you want to buy?"
+      >
+        <BuyContent />
       </Modal>
     </div>
   );

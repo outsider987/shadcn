@@ -1,10 +1,11 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ImageUploader } from "@/components/ui/image-uploader";
+import { ImageUploader } from "@/components/ImageUploader";
 import { ShowMoreOptions } from "@/components/ShowMoreOptions";
 import { useForm } from "react-hook-form";
 import { useMemo, useCallback } from "react";
 import { Textarea } from "./ui/textarea";
+import { Button } from "./ui/button";
 
 interface FormValues {
   name: string;
@@ -28,6 +29,7 @@ export const Content = ({ onSubmit }: ContentProps) => {
     handleSubmit,
     setValue,
     watch,
+    getValues,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -35,7 +37,7 @@ export const Content = ({ onSubmit }: ContentProps) => {
       ticker: "TEST",
       image: null,
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       socialLinks: {
         xLink: "https://x.com/SuiNetwork",
         discordLink: "https://x.com/SuiNetwork",
@@ -91,8 +93,8 @@ export const Content = ({ onSubmit }: ContentProps) => {
       onSubmit={formSubmitHandler}
       className="pt-4 w-full flex flex-col gap-4"
     >
-      <div className="flex gap-2">
-        <div className="grid w-full max-w-sm items-center gap-2">
+      <div className="flex gap-2 sm:flex-col md:flex-col">
+        <div className="grid w-full max-w-sm items-center gap-2 ">
           <Label htmlFor="name">Name</Label>
           <Input id="name" placeholder="Coin name" {...nameRegister} />
           {errors.name && (
@@ -136,15 +138,12 @@ export const Content = ({ onSubmit }: ContentProps) => {
       />
 
       {/* Launch button */}
-      <button
-        type="submit"
-        className="w-full bg-[#0066FF] text-white py-4 rounded-lg mt-4 font-medium min-h-[63px]"
-      >
+      <Button type="submit" variant="secondary" className="w-full min-h-[63px]">
         Launch!
-      </button>
+      </Button>
 
       {/* Bonding curve message */}
-      <p className="text-gray-500">
+      <p className="text-[#808080] text-sm">
         When your coin completes its bonding curve you receive 0.5 SUI
       </p>
     </form>
